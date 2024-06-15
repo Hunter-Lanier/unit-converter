@@ -9,18 +9,18 @@ class Conversion {
                 "milimeter": 1000,
                 "micrometer": 1000000,
                 "nanometer": 1000000000,
-                "mile": 0.000621371,
-                "yard": 1.09361,
-                "foot": 3.28084,
-                "inch": 39.3701,
+                "mile": 1 / 1609.344,
+                "yard": 1 * 1.094,
+                "foot": 1 * 3.281,
+                "inch": 1 * 39.37,
                 "light year": 1.057e-16,
 
 
             },
             "temperature": {
-                "C": 1,
-                "F": 33.8,
-                "K": 274.5,
+            "C": 1,
+            "F": undefined,
+            "K": undefined,
             },
             "area": {
                 'square-kilometer': 0.000001,
@@ -29,7 +29,7 @@ class Conversion {
                 'square-milimeter': 1000000,
                 'square-micrometer': 1000000000000,
                 'hectare': 0.0001,
-                'square-mile': 3.861e-7,
+                'square-mile': 1 / 3.861e-7,
                 'square-yard': 1.19599,
                 'square-foot': 10.7639,
                 'square-inch': 1550,
@@ -37,12 +37,12 @@ class Conversion {
 
             },
             "volume": {
-                'cubic-kilometer': 1e-15,
+               'cubic-kilometer': 1e-15,
                 'cubic-meter': 1,
-                'cubic-centimeter': 1000000,
-                'cubic-milimeter': 1000000000,
+                'cubic-centimeter': 1e6,
+                'cubic-millimeter': 1e9,
                 'liter': 1000,
-                'milliliter': 1000000,
+                'milliliter': 1e6,
                 'gallon': 264.172,
                 'quart': 1056.69,
                 'pint': 2113.38,
@@ -57,7 +57,7 @@ class Conversion {
                 'imperial-fluid-ounce': 35195.1,
                 'imperial-tablespoon': 56312.2,
                 'imperial-teaspoon': 168936,
-                'cubic-mile': 2.3991e-10,
+                'cubic-mile': 4.16818e9,
                 'cubic-yard': 1.30795,
                 'cubic-foot': 35.3147,
                 'cubic-inch': 61023.7,
@@ -72,13 +72,31 @@ class Conversion {
                 'pound': 2.20462,
                 'ounce': 35.274,
                 'carrat': 5000,
-                'atomic-mass-unit': 6.022e+26,
+                'atomic-mass-unit': 6.022e-26,
             },
 
         
         
         }
 
+    }
+    convertTemperature(value, from, to) {
+        switch (`${from}-To-${to}`) {
+            case 'C-To-F':
+                return (value * 9/5) + 32;
+            case 'C-To-K':
+                return value + 273.15;
+            case 'F-To-C':
+                return (value - 32) * 5/9;
+            case 'F-To-K':
+                return (value - 32) * 5/9 + 273.15;
+            case 'K-To-C':
+                return value - 273.15;
+            case 'K-To-F':
+                return (value - 273.15) * 9/5 + 32;
+            default:
+                throw new Error(`Unknown conversion: ${from} to ${to} with value ${value}`);
+        }
     }
     // Convert function
     convert(value, from, to, type) {
@@ -87,11 +105,19 @@ class Conversion {
             // If they are the same, return the value
             return value;
         }
+          // Check if the type is temperature
+        if (type === 'temperature') {
+            // Convert the temperature
+            return this.convertTemperature(value, from, to);
+        }
+        else {
         // Convert the value to base unit
     const valueInBaseUnit = value / this.units[type][from];
+    
     // Convert the value to the target unit
     const convertedValue = valueInBaseUnit * this.units[type][to];
-    return convertedValue;
+    return convertedValue;        
+}
     }
 }
 
