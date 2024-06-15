@@ -95,7 +95,7 @@ export default {
   },
   computed: {
     convertedValue() {
-      if (!this.inputValue || !this.inputType || !this.resultType) {
+      if (!this.inputValue || !this.inputType || !this.resultType && this.inputValue !== NaN) {
         console.log('Please fill in all fields');
         return;
       }
