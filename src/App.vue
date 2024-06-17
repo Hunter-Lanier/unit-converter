@@ -1,6 +1,6 @@
 <template>
   <!-- Container -->
-  <div class="Card h-full w-full bg-blue-100 flex justify-center items-center flex-col text-sm gap-10">
+  <div class="Card h-full w-full bg-slate-50 flex justify-center items-center flex-col text-sm gap-10">
     <!-- Type Selection -->
     <div class=" flex w-screen text-lg justify-center">
       <button @click="handleClick('length')"
@@ -18,8 +18,9 @@
     <div class="flex flex-row h-1/4 w-full justify-around items-center">
       <!-- Input Form -->
       <div class=" flex flex-col gap-4 justify-around ">
-        <input list="units-datalist" v-model="inputType" placeholder="From..." class="rounded-md">
-        <input v-model="inputValue" type="number" placeholder="0" class="rounded-md">
+        <input list="units-datalist" v-model="inputType" placeholder="From..."
+          class="rounded-md outline outline-2 outline-blue-500">
+        <input v-model="inputValue" type="number" placeholder="0" class="rounded-md outline outline-2 outline-blue-500">
       </div>
       <div
         :class="['flex flex-col w-auto h-max p-1 justify-center items-center rounded-md transition-all duration-300 active:bg-blue-500 active:text-blue-50 cursor-pointer']"
@@ -38,8 +39,10 @@
 
       </div>
       <div class=" flex flex-col gap-4 justify-around ">
-        <input list="units-datalist" v-model="resultType" placeholder="To..." class="rounded-md">
-        <input v-model="this.convertedValue" type="number" placeholder="0" class="rounded-md">
+        <input list="units-datalist" v-model="resultType" placeholder="To..."
+          class="rounded-md outline outline-2 outline-blue-500">
+        <input v-model="this.convertedValue" type="number" placeholder="0"
+          class="rounded-md outline outline-2 outline-blue-500">
       </div>
       <!-- Datalist for units -->
       <datalist id="units-datalist">
