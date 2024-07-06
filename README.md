@@ -16,8 +16,6 @@ A simple and responsive unit converter application built with Vue.js and Tailwin
 ### Desktop View
 ![Desktop View](./screenshots/desktop_view.png)
 
-### Mobile View
-![Mobile View](./screenshots/mobile_view.png)
 
 ## Installation
 
